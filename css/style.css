@@ -592,3 +592,261 @@ img {
         height: 250px;
     }
 }
+
+/* --- Creative Effects --- */
+
+/* Scroll Reveal Animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered delay for children if needed via JS or nth-child, but keeping it simple for now */
+
+/* 3D Tilt Effect Base */
+.project-card {
+    /* Existing styles remain, ensuring we have transition for smooth return */
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
+    /* Faster transform for tilt */
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+/* Enhanced Hover for Skills */
+.tag {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Bouncy effect */
+}
+
+.tag:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    transform: scale(1.1) rotate(2deg);
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+}
+
+/* Gradient Text Effect for Name */
+.name {
+    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+    /* Required for background-clip on some browsers */
+}
+
+/* Interactive Button Hover */
+.btn {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+    z-index: -1;
+}
+
+.btn:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* --- Global Hover & Spotlight --- */
+
+/* Animated Background & Shapes */
+body {
+    background: linear-gradient(-45deg, #f0f9ff, #e0f2fe, #dbeafe, #eff6ff);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    position: relative;
+    overflow-x: hidden;
+    /* Prevent scrollbar from shapes */
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.background-shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.shape {
+    position: absolute;
+    filter: blur(50px);
+    opacity: 0.6;
+    animation: floatShape 20s infinite alternate;
+}
+
+.shape-1 {
+    top: -10%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.4), transparent);
+    animation-delay: 0s;
+}
+
+.shape-2 {
+    bottom: 20%;
+    right: -5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.3), transparent);
+    animation-delay: -5s;
+}
+
+.shape-3 {
+    top: 40%;
+    left: 30%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.2), transparent);
+    /* Emerald touch */
+    animation-delay: -10s;
+}
+
+@keyframes floatShape {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(50px, 50px) rotate(20deg);
+    }
+}
+
+/* Glassmorphism Classes & Overrides */
+.navbar {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.project-card,
+.skill-category,
+.cert-card,
+.contact-item,
+.resume-cta-wrapper {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+
+.education-list,
+.achievements-box {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Enhanced Section Titles */
+.section-title {
+    background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+    /* for clip */
+    /* Ensure old transparent background doesn't stay if clip fails in edge cases */
+}
+
+.section-title::after {
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    height: 3px;
+    border-radius: 10px;
+}
+
+/* Spotlight Glow */
+#spotlight {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, rgba(37, 99, 235, 0) 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    /* Allows clicking through it */
+    z-index: 9999;
+    mix-blend-mode: multiply;
+    /* Blends nicely with light backgrounds */
+    transition: width 0.3s ease, height 0.3s ease;
+    /* For potential pulsing */
+}
+
+/* Universal Interactive Scale */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+span,
+i,
+img {
+    transition: transform 0.3s ease, color 0.3s ease, filter 0.3s ease;
+}
+
+/* Be selective to avoid layout breaking or annoyance */
+/* Apply hover effect to block or inline-block text elements */
+.about-text p:hover,
+.hero-content h1:hover,
+.hero-content h2:hover,
+.hero-content p:hover,
+.achievements-list li:hover,
+.contact-item:hover {
+    transform: scale(1.02);
+    /* cursor: none; Optional: if we want to replace cursor */
+}
+
+/* List items in skills/achievements */
+.achievements-list li:hover {
+    color: var(--primary-color);
+    transform: translateX(10px);
+}
+
+/* Make images pop */
+img:hover {
+    transform: scale(1.03);
+    filter: brightness(1.05);
+}
+   
